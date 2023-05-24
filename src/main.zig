@@ -91,8 +91,8 @@ pub const WOTS = struct {
 };
 
 test "sign and verify" {
-    var wots = WOTS.generateKeyPair();
+    var keypair = WOTS.generateKeyPair();
     const message = [5]u8{ 'h', 'e', 'l', 'l', 'o' };
-    const signature = wots.sign(&message);
-    try testing.expect(wots.verify(&message, signature));
+    const signature = keypair.sign(&message);
+    try testing.expect(keypair.verify(&message, signature));
 }
