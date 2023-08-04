@@ -12,7 +12,7 @@ pub const WOTS = struct {
         var secret_key: [32][32]u8 = undefined;
         var public_key: [32][32]u8 = undefined;
 
-        for (secret_key) |*key| {
+        for (&secret_key) |*key| {
             var temp: [32]u8 = undefined;
             std.crypto.random.bytes(&temp);
             key.* = temp;
@@ -70,7 +70,7 @@ pub const WOTS = struct {
             public_key[i] = s;
         }
 
-        for (public_key) |key, index| {
+        for (public_key, 0..) |key, index| {
             if (!std.mem.eql(u8, &key, &self.public_key[index])) {
                 return false;
             }
